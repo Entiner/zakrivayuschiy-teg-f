@@ -28,7 +28,7 @@
 }
 
 .heart .contour {
-  fill: var(--color-button-contur);
+  fill: var(--color-button-contour);
   transition: fill 0.1s linear;
 }
 

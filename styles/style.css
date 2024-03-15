@@ -8,7 +8,7 @@
 ✦ card__icon-button — для кнопки, оборачивающей иконку
 ✦ card__icon-button — для кнопки, оборачивающей иконку
 ✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
+✦ button__text — для обозначения текстового элемента внутри кнопки 
 
 Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
 
@@ -348,7 +348,7 @@ input::placeholder {
   color: rgb(0 0 0 / 0.75);
 }
 
-.close-button-conteiner {
+.close-button-container {
   display: flex;
   justify-content: center;
   align-self: center;
