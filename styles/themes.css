@@ -4,69 +4,56 @@
 ✦ theme-light — класс светлой темы
 ✦ не забудьте описать стили для изменения темы через медизапрос пользовательских предпочтений
 */
-:root.theme-dark {
-  --font-weight-text: 465;
-  --font-weight-title: 785;
-  --accent-color-theme: #00CC14;
-  --accent-color-text-button: #00CC14;
-  --color-background-theme: #000;
-  --color-button-sparks: #FF0000;
-  --background-image: repeating-linear-gradient(
-    90deg,
-    #000 0 2px,
-    rgba(0 0 0 / 0) 2px 4px
-  ),
-  repeating-linear-gradient(180deg, #000 0 2px, rgba(0 0 0 / 0) 2px 4px),
-  repeating-linear-gradient(to bottom, #007f0c 0.01%, #004306 100%);
-  --stroke-color: #000;
-  --color-button-contour: #00CC14;
-}
-
 :root.theme-light {
-  --font-weight-text: 400;
-  --font-weight-title: 700;
-  --accent-color-theme: #000000;
-  --accent-color-text-button: #FFF;
-  --color-background-theme: #FFF;
-  --background-image: 
-    repeating-linear-gradient(90deg,#d3d3d3 0 2px,rgba(0 0 0 / 0) 2px 4px),
-    repeating-linear-gradient(180deg, #d3d3d3 0 2px, rgba(0 0 0 / 0) 2px 4px),
-    repeating-linear-gradient(to bottom, #e7e7e7 0.01%, #1a1a1a 100%);
-  --stroke-color: #FFF;
-  --color-button-contour: #000;
-  --color-button-sparks: #FF0000;
+  --header-font-weight: 700;
+  --page-main-font-weight: 400;
+  --button-text-color: var(--color-white, #fff);
+  --text-color: var(--color-black, #000000);
+  --background-color: var(--color-white, #ffffff);
+  --button-hover-color: var(--color-white, #ffffff);
+  --page-background-color: var(--color-white, #ffffff);
+  --page-background-image: repeating-linear-gradient(
+    to left,
+    #d3d3d3 0 2px,
+    #d3d3d300 2px 4px
+  ),
+  repeating-linear-gradient(to bottom, #d3d3d3 0 2px, #d3d3d300 2px 4px),
+  linear-gradient(to bottom, #e7e7e7 0.01%, #1a1a1a);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --font-weight-text: 400;
-    --font-weight-title: 700;
-    --accent-color-theme: #000000;
-    --accent-color-text-button: #FFF;
-    --color-background-theme: #FFF;
-    --background-image: 
-      repeating-linear-gradient(90deg,#d3d3d3 0 2px,rgba(0 0 0 / 0) 2px 4px),
-      repeating-linear-gradient(180deg, #d3d3d3 0 2px, rgba(0 0 0 / 0) 2px 4px),
-      repeating-linear-gradient(to bottom, #e7e7e7 0.01%, #1a1a1a 100%);
-    --stroke-color: #FFF;
-    --color-button-contour: #000;
-    --color-button-sparks: #FF0000;
-  }
+
+:root.theme-dark {
+  --header-font-weight: 785;
+  --page-main-font-weight: 465;
+  --button-text-color: var(--color-green, #00cc14);
+  --text-color: var(--color-green, #00cc14);
+  --button-hover-color: var(--color-green, #00cc14);
+  --page-background-color: var(--color-black, #000000);
+  --page-background-image: repeating-linear-gradient(
+      to left,
+      #000000 0 2px,
+      #00000000 2px 4px
+    ),
+    repeating-linear-gradient(to bottom, #000000 0 2px, #00000000 2px 4px),
+    linear-gradient(to bottom, #007f0c, #004306);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --font-weight-text: 465;
-    --font-weight-title: 785;
-    --accent-color-theme: #00CC14;
-    --accent-color-text-button: #00CC14;
-    --color-background-theme: #000;
-    --background-image: 
-      repeating-linear-gradient(90deg,#000 0 2px,rgba(0 0 0 / 0) 2px 4px),
-      repeating-linear-gradient(180deg, #000 0 2px, rgba(0 0 0 / 0) 2px 4px),
-      repeating-linear-gradient(to bottom, #007f0c 0.01%, #004306 100%);
-    --stroke-color: #000;
-    --color-button-contour: #00CC14;
-    --color-button-sparks: #FF0000;
+      --header-font-weight: 785;
+      --page-main-font-weight: 465;
+      --button-text-color: var(--color-green, #00cc14);
+      --text-color: var(--color-green, #00cc14);
+      --button-hover-color: var(--color-green, #00cc14);
+      --page-background-color: var(--color-black, #000000);
+      --page-background-image: repeating-linear-gradient(
+          to left,
+          #000000 0 2px,
+          #00000000 2px 4px
+        ),
+        repeating-linear-gradient(to bottom, #000000 0 2px, #00000000 2px 4px),
+        linear-gradient(to bottom, #007f0c, #004306);
   }
+
+
 }

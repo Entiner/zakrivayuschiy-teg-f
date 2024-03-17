@@ -8,228 +8,314 @@
 ✦ card__icon-button — для кнопки, оборачивающей иконку
 ✦ card__icon-button — для кнопки, оборачивающей иконку
 ✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки 
+✦ button__text — для обозначения текстового элемента внутри кнопки
 
 Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
 
 */
 
 .page {
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-  color: var(--accent-color-theme);
-  font-family: var(--font-family-inter);
-  font-size: 18px;
-  background-color: var(--color-background-theme);
-  background-image: var(--background-image);
-  background-repeat: no-repeat;
+  min-inline-size: 375px;
+  min-block-size: 100dvb;
+  font-family: var(--page-main-font-family, "Inter", sans-serif);
+  background-color: var(--page-background-color, #ffffff);
+  color: var(--text-color, #000000);
+  background-image: var(--page-background-image, #ffffff);
   background-size: cover;
   background-attachment: fixed;
-  min-inline-size: 320px;
-  min-block-size: 100dvb;
-  font-variation-settings: 'wght' var(--font-weight-text);
+  font-variation-settings: "wght" var(--page-main-font-weight, 400);
 }
 
-#my-popover {
-  border: 1px solid;
-  padding: 15px;
+.page-header {
+  margin-block-end: 100px;
 }
 
 .header {
   display: grid;
-  align-self: center;
-  width: clamp(23.4375rem, 16.2852rem + 30.5164vw, 43.75rem);
-  margin-block-start: 100px;
-  border: 2px solid var(--accent-color-theme);
-  padding-block-start: clamp(7.5rem, 7.1479rem + 1.5023vw, 8.5rem);
-  font-family: var(--font-family-ps2p);
-  background-color: var(--color-background-theme);
+  justify-items: center;
+  justify-content: center;
+  font-family: var(--page-accent-font-family, "PressStart2P", fantasy);
+  line-height: normal;
+  text-transform: uppercase;
+  margin-top: 102px;
 }
 
-.title {
+.header-title {
+  margin-block-start: clamp(7.5rem, 7.1479rem + 1.5023vw, 8.5rem);
   margin-block-end: 20px;
-  font-size: clamp(3.0625rem, 1.9087rem + 4.9231vw, 4.0625rem);
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 400;
 }
 
-.content-title {
-  font-size: clamp(0.875rem, 0.226rem + 2.7692vw, 1.4375rem);
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 400;
+.page-title {
+  font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
+  outline:none;
+  cursor: pointer;
 }
 
-.theme-menu {
+.header-subtitle {
+  font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
+}
+
+.header__theme-menu {
+  margin-block: 25px;
+}
+
+.theme-menu-list {
   display: grid;
-  margin-block-start: 25px;
-  margin-block-end: 25px;
-  margin-inline-start: 20px;
+  gap: 8px;
+  padding-inline-start: 20px;
 }
 
-.theme-menu__list {
-  display: flex;
-  flex-direction: column;
-  width: 84px;
-  justify-self: center;
-  gap: 14px;
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--text-color, #000000);
+  transition: transform 0.5s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+  inline-size: 100%;
+  block-size: 100%;
 }
 
-.theme-menu__item {
-  display: flex;
-  height: 14px;
-  font-size: 14px;
-  font-weight: 400;
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+.button__text,
+.button__icon {
+  position: relative;
+  font-family: var(--page-accent-font-family, "PressStart2P", fantasy);
+  line-height: normal;
+
+  color: var(--button-hover-color, #ffffff);
+  mix-blend-mode: difference;
+}
+
+.button:hover {
+  color: #fff;
 }
 
 .theme-menu__button {
   position: relative;
-  padding: 0;
   border: none;
-  background-color: transparent;
+  font-size: 14px;
   text-transform: uppercase;
-  cursor: pointer;
-  text-align: left;
-}
-
-.theme-menu__button::after {
-  content: '';
-  display: block;
-  width: 0%;
-  height: 2px;
-  background-color: var(--accent-color-theme);
-  transition: width 0.3s ease;
-}
-
-.theme-menu__button:focus {
-  outline: none;
-  opacity: 0.6;
+  background: transparent;
   transition: opacity 0.3s ease;
-}
-
-.theme-menu__button:focus-visible::after {
-  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
 }
 
 .theme-menu__button:hover {
   opacity: 0.6;
-  transition: opacity 0.3s ease;
 }
 
-.theme-menu__button:disabled {
+.theme-menu__button:focus {
+  text-decoration: none;
   opacity: 0.6;
-  pointer-events: none;
+}
+
+.theme-menu__button:not(:disabled)::after {
+  content: "";
+  display: block;
+  background: currentColor;
+  transition: transform 0.3s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  inline-size: 100%;
+  block-size: 2px;
+}
+
+.theme-menu__button:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .theme-menu__button:disabled::before {
   content: "▶";
   position: absolute;
-  opacity: 0.6;
-  animation-name: rotate;
-  animation-direction: alternate;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  pointer-events: none;
+  animation: arrow 0.5s ease-in-out infinite alternate;
   inset-inline-start: -20px;
-  animation-duration: 0.5s;
-  aspect-ratio: 1/1;
+  inset-block-start: 0px;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
+.theme-menu__button:disabled {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+}
+
+.main {
+  display: grid;
+  justify-items: center;
   gap: 50px;
+  padding-block-end: 105px;
 }
 
-.section {
-  align-self: center;
-  width: clamp(23.4375rem, 16.2852rem + 30.5164vw, 43.75rem);
-  border: 2px solid var(--accent-color-theme);
-  background-color: var(--color-background-theme);
+.card {
+  margin-inline: auto;
+  border: 2px solid var(--text-color, #000000);
+  background: var(--page-background-color, #ffffff);
+  max-inline-size: 700px;
 }
 
-.section-title {
+.card-header {
+  border-block-end: 2px solid var(--text-color, #000000);
   padding: 5px 10px;
+}
+
+.card-list {
+  display: grid;
+  gap: 52px;
+}
+
+.card-title {
+  font-family: var(--page-main-font-family, "Inter", sans-serif);
   font-size: 18px;
-  font-variation-settings: 'wght' var(--font-weight-title);
+  font-style: normal;
+  line-height: normal;
+  font-variation-settings: "wght" var(--header-font-weight, 700);
 }
 
-.section-image {
+.card-img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.filter-1 {
+  filter: grayscale(70%);
+}
+
+.filter-2 {
+  filter: sepia(80%);
+}
+
+.filter-3 {
+  filter: blur(2px);
+}
+
+.filter-4 {
+  filter: brightness(65%);
+}
+
+.filter-5 {
+  filter: contrast(60%) saturate(120%) hue-rotate(116deg);
+}
+
+.filter-6 {
+  filter: invert(35%);
+}
+
+.filter-7 {
+  filter: opacity(80%);
+}
+
+.card-content {
+  display: grid;
+  gap: 27px;
+  border-block-start: 2px solid var(--text-color, #000000);
+  padding: 25px 25px 0 25px;
+  font-size: 18px;
+  line-height: calc(21 / 18);
+}
+
+.card-img-image {
   position: relative;
-  width: clamp(23.1875rem, 16.0352rem + 30.5164vw, 43.5rem);
-  height: clamp(23.4375rem, 16.2852rem + 30.5164vw, 43.75rem);
-  border-top: 2px solid var(--accent-color-theme);
-  border-bottom: 2px solid var(--accent-color-theme);
+  overflow: hidden;
+  max-inline-size: 696px;
 }
 
-.label {
+.card-img-label {
   position: absolute;
-  top: 25px;
-  right: clamp(0.6875rem, 0.3794rem + 1.3146vw, 1.5625rem);
-  z-index: 2;
-  opacity: 0.5;
-  font-family: var(--font-family-ps2p);
-  font-weight: 400;
+  font-family: var(--page-accent-font-family, "PressStart2P", fantasy);
   font-size: 14px;
-  text-shadow: 
-  -1px 0 var(--stroke-color), 
-  0 1px var(--stroke-color), 
-  1px 0 var(--stroke-color), 
-  0 -1px var(--stroke-color);
+  font-style: normal;
+  line-height: normal;
+  opacity: 0.5;
   mix-blend-mode: hard-light;
+  color: var(--text-color, #000000);
+  inset-inline-end: 25px;
+  inset-block-start: 25px;
+  z-index: 1;
+  text-shadow: 0 0 1px var(--page-background-color, #ffffff);
 }
 
-.label-upp {
-  text-transform: uppercase;
-}
-
-.label-low {
-  text-transform: lowercase;
-}
-
-@supports((text-stroke: 1px var(--stroke-color)) or (-webkit-text-stroke: 1px var(--stroke-color))) {
-  .label {
-      text-shadow: none;
-      -webkit-text-stroke: 1px var(--stroke-color);
-      text-stroke: 1px var(--stroke-color);
-  }
-} 
-
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-}
-
-.section-content {
+.card__like-button {
   display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding: 25px;
-}
-
-.section-content-text {
-  line-height: 21px;
-}
-
-.section-content-button {
-  display: flex;
-  gap: clamp(0.625rem, 0.581rem + 0.1878vw, 0.75rem);
-  align-self: end;
+  width: 130px;
   height: 38px;
+  padding: 9px 17px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--text-color, #000);
+  background: var(--page-background-color, #fff);
+  font-family: var(--page-accent-font-family, "PressStart2P", fantasy);
+  font-size: 14px;
+  outline: none;
+}
+
+.card__like-button:focus-visible,
+.modal-button:focus-visible,
+.button-save:focus-visible {
+  border: 2px solid var(--text-color, #000);
+  box-shadow: 2px 2px 0px 0px var(--text-color, #000);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 25px 25px 23px 25px;
+  gap: 5px;
+}
+
+.button__icon {
+  block-size: 22px;
+  inline-size: 22px;
+}
+
+.button {
+  position: relative;
+  z-index: 1;
+  border: 2px solid var(--text-color, #000000);
+  padding: 10px 36px;
+  font-size: 14px;
+  text-transform: inherit;
+  background: var(--page-background-color, #ffffff);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  appearance: none;
+}
+
+.button-save {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  outline: none;
+}
+
+.like-icon {
+  block-size: 36px;
+  inline-size: 39px;
 }
 
 .card__icon-button {
-  position: relative;
-  display: flex;
-  
-  align-items: center;
-  border: none;
+  display: grid;
+  border: 2px solid transparent;
   padding: 0;
-  background-color: transparent;
-  cursor: pointer
+  background: transparent;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+  appearance: none;
+  height: 38px;
 }
 
 .card__icon-button:focus {
@@ -237,211 +323,82 @@
 }
 
 .card__icon-button:focus-visible {
-  outline: 2px solid var(--accent-color-theme);
-  transition: 0.3s ease;
+  border-color: var(--text-color, #000000);
 }
 
-.card__like-button {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 130px;
-  border: 2px solid var(--accent-color-theme);
-  padding: 9px 17px;
-  font-family: var(--font-family-ps2p);
-  font-size: 14px;
-  line-height: 90%;
-  background-color: transparent;
-  cursor: pointer
-}
-
-.footer {
-  display: grid;
-  grid-template-columns: min-content;
-  justify-content: center;
-  font-family: var(--font-family-ps2p);
-  font-size: 14px;
-  line-height: 90%;
-  margin-block-end: 100px;
-}
-
-.footer__content {
-  display: flex;
-  background-color: var(--color-background-theme);
-}
-
-.floppy-footer {
-  align-self: center;
-  width: 21px;
-  height: 21px;
-  color: var(--accent-color-text-button);
-  mix-blend-mode: difference;
-}
-
-.button__dialog-active {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border: 2px solid var(--accent-color-theme);
-  padding: 15px 20px;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.text__footer {
-  align-self: center;
-  min-inline-size: 266px;
-}
-
-.dialog[open] {
-  display: flex;
-  flex-direction: column;
-  max-width: clamp(21.5625rem, 21.2104rem + 1.5023vw, 22.5625rem);
-  gap: 30px;
-  margin: auto;
-  border: 2px solid var(--accent-color-theme);
-  padding: 30px;
-  font-family: var(--font-family-ps2p);
-  font-weight: var(--font-weight-text);
-  font-size: 14px;
+.modal {
+  max-inline-size: 355px;
+  font-family: var(--page-accent-font-family, "PressStart2P", fantasy);
+  color: var(--text-color, #000000);
+  line-height: 1.5;
   text-transform: uppercase;
-  background-color: var(--color-background-theme);
-  transition: opacity 0.3s ease-in-out;
+  background-color: var(--page-background-color, #ffffff);
+  border: 2px solid var(--text-color, #000000);
+  padding: 30px 30px;
+  font-size: 14px;
+  height: 195px;
 }
 
-dialog:not([open]) {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.dialog__content {
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  justify-self: center;
-  gap: 20px;
-  width: clamp(16.0625rem, 15.2702rem + 3.3803vw, 18.3125rem);
-}
-
-.dialog__svg {
-  width: 39px;
+.modal-icon {
   height: 39px;
-  color: var(--accent-color-theme);
-  align-self: center;
+  width: 39px;
+  flex-shrink: 0;
+  
 }
 
-.dialog__text {
-  max-width: 234px;
-  color: var(--accent-color-theme);
-  line-height: 150%;
-  text-transform: uppercase;
-}
-
-.dialog::backdrop {
-  background-color: rgb(0 0 0 / 0.3);
-  backdrop-filter: blur(7px);
-}
-
-input::placeholder {
-  color: rgb(0 0 0 / 0.75);
-}
-
-.close-button-container {
-  display: flex;
+.modal[open] {
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  gap: 30px;
+  align-content: center;
   justify-content: center;
-  align-self: center;
+}
+/*у меня вроде в середине открывается*/
+
+.modal::backdrop {
+  opacity: 0.75;
+  background: var(--text-color, #000000);
 }
 
-.close-button {
-  position: relative;
+.modal-content {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: clamp(16.0625rem, 15.2702rem + 3.3803vw, 18.3125rem);
-  height: 38px;
-  border: 2px solid var(--accent-color-theme);
-  padding: 9px 17px;
-  color: var(--accent-color-theme);
-  font-family: var(--font-family-ps2p);
-  line-height: 90%;
-  background-color: transparent;
-  text-transform: uppercase;
-  cursor: pointer
+  gap: 20px;
 }
 
-.card-button-animation:focus {
-  box-shadow: 2px 2px 0px 0px var(--accent-color-theme);
+.modal-button {
+  inline-size: 100%;
   outline: none;
-  transition: 0.3s ease;
-}
-
-.card-button-animation::before {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-color: var(--accent-color-theme);
-  transition: 0.5s ease-in-out;
-  transform: scale(0, 1);
-  transform-origin: left;
-}
-
-.card-button-animation:hover::before {
-  transform: scale(1, 1);
-}
-
-.button__text {
-  position: relative;
-  color: var(--accent-color-text-button);
-  mix-blend-mode: difference;
-}
-
-.image-contrast {
-  filter: brightness(50%) contrast(80%);
-}
-
-.image-blur {
-  filter: blur(2px) brightness(70%);
-}
-
-.image-saturate {
-  filter: saturate(200%) brightness(70%);
-}
-
-.image-invert {
-  filter:invert(100%) ;
-}
-
-.image-hue-rotate {
-  filter: hue-rotate(180deg) brightness(70%);
-}
-
-.image-brightness {
-  filter: brightness(60%);
-}
-
-.image-grayscale {
-  filter: grayscale(100%);
-}
-
-.image-filter {
-  filter: contrast(80%) brightness(80%) hue-rotate(270deg);
 }
 
 @media (width <= 375px) {
-  .button__dialog-active {
+  .modal {
+    padding: 28px 34px 28px 40px;
+    max-inline-size: 340px;
+    height: 195px;
+  }
+
+  .button-save {
     flex-direction: column;
   }
 
-  .floppy-footer {
-    width: 28px;
-    height: 28px;
+  .button__icon {
+    block-size: 28px;
+    inline-size: 28px;
   }
 
-  .dialog[open] {
-    padding: 30px 40px;
+  .card-img-label {
+    inset-inline-end: 11px;
+  }
+}
+
+@supports (
+  (-webkit-text-stroke: 1px var(--page-background-color, #ffffff)) or
+    (text-stroke: 1px var(--page-background-color, #ffffff))
+) {
+  .card-img-label {
+    text-shadow: none;
+    -webkit-text-stroke: 1px var(--page-background-color, #ffffff);
+    text-stroke: 1px var(--page-background-color, #ffffff);
   }
 }
